@@ -21,15 +21,15 @@ export const arrayShift = (array) => {
     let savedArray = [];
     let arrayChanger = [];
 
-    //Primero guardamos los elementos del último al antepenultimo en orden inverso
+    // Primero guardamos los elementos del último al antepenultimo en orden inverso
     for (let i = arrayLength(array); i > 1; i--) {
         arrayPush(savedArray, i);
     }
 
-    //Una vez guardamos creamos un counter en base a estos elementos guardados
+    // Una vez guardamos creamos un counter en base a estos elementos guardados
     let counter = arrayLength(savedArray) - 1;
 
-    //Ahora les invertimos el orden a los elementos guardados
+    // Ahora les invertimos el orden a los elementos guardados
     for (let i = 0; i < arrayLength(savedArray); i++) {
         arrayChanger[counter] = savedArray[i];
         counter--;
@@ -40,4 +40,42 @@ export const arrayShift = (array) => {
     }
     array.length = array.length - 1;
     return firstArrayElement;
+};
+
+export const arrayUnshift = (array, value) => {
+    // Creamos una variable contenedora y le asociamos el value como primer valor
+    const savedArray = [];
+    savedArray[0] = value;
+
+    //Recorremos el array de la variable contando con que necesitamos empezar en el "index" 1
+    for (let i = 1; i < arrayLength(array) + 1; i++) {
+        arrayPush(savedArray, i);
+    }
+
+    //Actualizamos nuestro array
+    for (let i = 0; i < arrayLength(savedArray); i++) {
+        array[i] = savedArray[i];
+    }
+    return arrayLength(array);
+};
+
+export const arrayIndexOf = (array, value) => {
+    for (let i = 0; i < arrayLength(array); i++) {
+        if (array[i] === value) {
+            return i;
+        }
+    }
+};
+
+export const arrayJoin = (array, value) => {
+    let savedResult = array[0] + value;
+
+    for (let i = 1; i < arrayLength(array); i++) {
+        savedResult = savedResult + array[i];
+        if (arrayLength(array) - 1 === i) {
+            return savedResult;
+        }
+        savedResult = savedResult + value;
+    }
+    return savedResult;
 };

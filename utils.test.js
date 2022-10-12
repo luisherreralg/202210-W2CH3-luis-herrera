@@ -1,4 +1,12 @@
-import { arrayLength, arrayPop, arrayPush, arrayShift } from './utils.js';
+import {
+    arrayIndexOf,
+    arrayJoin,
+    arrayLength,
+    arrayPop,
+    arrayPush,
+    arrayShift,
+    arrayUnshift,
+} from './utils.js';
 
 describe('Given a arrayLength function', () => {
     const arrTest = [1, 2, 3];
@@ -32,5 +40,32 @@ describe('Given a arrayShift function', () => {
         const expectedResult = 1;
         const result = arrayShift(arrTest);
         expect(result).toStrictEqual(expectedResult);
+    });
+});
+
+describe('Given a arrayUnshift function', () => {
+    test(`When parameters are an array and a value, the result must be the length of the array including the parameter passed, and change that array taking the value as the first element of that array`, () => {
+        const arrTest = [1, 2, 3];
+        const expectedResult = 4;
+        const result = arrayUnshift(arrTest, 10);
+        expect(result).toBe(expectedResult);
+    });
+});
+
+describe('Given a arrayIndexOf function', () => {
+    test(`When parameters are an array and a value, the result must be the index of the value inside the array passed`, () => {
+        const arrTest = [1, 2, 3];
+        const expectedResult = 2;
+        const result = arrayIndexOf(arrTest, 3);
+        expect(result).toBe(expectedResult);
+    });
+});
+
+describe('Given a arrayJoin function', () => {
+    test(`When parameters are an array and a value, the result must a new string concatenating the elements in the array given with the values`, () => {
+        const arrTest = ['Pepe', 'Manolo', 'Jacinto'];
+        const expectedResult = 'Pepe-Manolo-Jacinto';
+        const result = arrayJoin(arrTest, '-');
+        expect(result).toBe(expectedResult);
     });
 });
