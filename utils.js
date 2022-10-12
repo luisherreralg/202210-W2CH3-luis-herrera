@@ -18,15 +18,26 @@ export const arrayPop = (array) => {
 
 export const arrayShift = (array) => {
     let firstArrayElement = array[0];
-    let counter = 0;
-    for (let i = arrayLength(array); i > 1; i--) {
-        console.log(i, counter);
-        array[counter] = array[arrayLength(array)];
-        counter++;
-    }
-    // array.length = array.length - 1;
-};
+    let savedArray = [];
+    let arrayChanger = [];
 
-const arr1 = [1, 2, 3, 4];
-arrayShift(arr1);
-console.log(arr1);
+    //Primero guardamos los elementos del último al antepenultimo en orden inverso
+    for (let i = arrayLength(array); i > 1; i--) {
+        arrayPush(savedArray, i);
+    }
+
+    //Una vez guardamos creamos un counter en base a estos elementos guardados
+    let counter = arrayLength(savedArray) - 1;
+
+    //Ahora les invertimos el orden a los elementos guardados
+    for (let i = 0; i < arrayLength(savedArray); i++) {
+        arrayChanger[counter] = savedArray[i];
+        counter--;
+    }
+    // Les asociamos los elementos guardados a nuestra función en su respectivo orden
+    for (let i = 0; i < arrayLength(arrayChanger); i++) {
+        array[i] = arrayChanger[i];
+    }
+    array.length = array.length - 1;
+    return firstArrayElement;
+};
