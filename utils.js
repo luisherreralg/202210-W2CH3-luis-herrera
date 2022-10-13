@@ -1,3 +1,20 @@
+export const errorArrayControl = (array) => {
+    if (array[0] === undefined) {
+        throw new Error(
+            'Parámetros no válidos, no se puede introducir un array vacío'
+        );
+    }
+};
+
+export const errorValueControl = (value) => {
+    if (value === null) {
+        throw new Error(
+            'Parámetros no válidos, no se puede operar con un null'
+        );
+    }
+};
+
+// --------------------------------------------------
 export const arrayLength = (array) => {
     let iCounter = 0;
     for (let i = 0; array[i] !== undefined; i++) {
@@ -7,16 +24,20 @@ export const arrayLength = (array) => {
 };
 
 export const arrayPush = (array, value) => {
+    errorValueControl(value);
     array[arrayLength(array)] = value;
+    return arrayLength(array);
 };
 
 export const arrayPop = (array) => {
+    errorArrayControl(array);
     let lastArrayElement = array[arrayLength(array) - 1];
     array.length = array.length - 1;
     return lastArrayElement;
 };
 
 export const arrayShift = (array) => {
+    errorArrayControl(array);
     let firstArrayElement = array[0];
     let savedArray = [];
     let arrayChanger = [];
@@ -43,6 +64,8 @@ export const arrayShift = (array) => {
 };
 
 export const arrayUnshift = (array, value) => {
+    errorArrayControl(array);
+    errorValueControl(value);
     // Creamos una variable contenedora y le asociamos el value como primer valor
     const savedArray = [];
     savedArray[0] = value;
@@ -60,6 +83,8 @@ export const arrayUnshift = (array, value) => {
 };
 
 export const arrayIndexOf = (array, value) => {
+    errorArrayControl(array);
+    errorValueControl(value);
     for (let i = 0; i < arrayLength(array); i++) {
         if (array[i] === value) {
             return i;
@@ -68,8 +93,9 @@ export const arrayIndexOf = (array, value) => {
 };
 
 export const arrayJoin = (array, value) => {
+    errorArrayControl(array);
+    errorValueControl(value);
     let savedResult = array[0] + value;
-
     for (let i = 1; i < arrayLength(array); i++) {
         savedResult = savedResult + array[i];
         if (arrayLength(array) - 1 === i) {

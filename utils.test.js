@@ -6,8 +6,30 @@ import {
     arrayPush,
     arrayShift,
     arrayUnshift,
+    errorArrayControl,
+    errorValueControl,
 } from './utils.js';
 
+//--------------------TEST ERROR CONTROL-----------------------
+describe('Given errorArrayControl', () => {
+    test('When the parameter is empty, the result should be Error', () => {
+        const arrTest = [];
+        expect(() => {
+            errorArrayControl(arrTest);
+        }).toThrow();
+    });
+});
+
+describe('Given errorValueControl', () => {
+    test('When the parameter is null, the result should be Error', () => {
+        const valueTest = null;
+        expect(() => {
+            errorValueControl(valueTest);
+        }).toThrow();
+    });
+});
+
+//-------------------TESTS-------------------------------------
 describe('Given a arrayLength function', () => {
     const arrTest = [1, 2, 3];
     test(`When parameters are an array, the result should be the array length  ${arrTest.length}`, () => {
